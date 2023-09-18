@@ -1,0 +1,40 @@
+{
+  "name": "create-e3-app",
+  "version": "1.0.0",
+  "description": "Create backend application with the e3 stack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musabdev/create-e3-app.git",
+    "directory": "cli"
+  },
+  "main": "index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "bin": {
+    "create-e3-app": "./dist/index.js"
+  },
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "rm -rf ./dist && tsc",
+    "dev": "ts-node ./src/index.ts"
+  },
+  "keywords": [
+    "create-e3-app",
+    "express.js",
+    "prisma",
+    "e3-stack",
+    "typescript"
+  ],
+  "author": "musabdev",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "picocolors": "^1.0.0"
+  }
+}
