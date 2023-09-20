@@ -10,7 +10,7 @@ async function main() {
 
   p.intro(`${color.bgCyan(color.black(' create-e3-app '))}`)
 
-  const { name, database, packageManager } = await p.group(
+  const { name, database, git, packageManager } = await p.group(
     {
       name: () =>
         p.text({
@@ -34,6 +34,16 @@ async function main() {
             { value: 'prisma', label: 'Prisma' },
           ],
           initialValue: 'none',
+        })
+      },
+      git: () => {
+        return p.select({
+          message: 'Initialize a new git repository?',
+          options: [
+            { value: 'yes', label: 'Yes' },
+            { value: 'no', label: 'No' },
+          ],
+          initialValue: 'yes',
         })
       },
       packageManager: () =>
@@ -85,6 +95,12 @@ async function main() {
           ? `${packageManager} install -D prisma`
           : 'yarn add -D prisma'
       }`,
+    )
+  }
+
+  if (git === 'yes') {
+    await execShellCommand(
+      `cd ${name} && git init && git add . && git commit -m "Initial commit from create-e3-app"`,
     )
   }
 
