@@ -1,10 +1,10 @@
 import { type Request, type Response } from 'express'
 
+import { prisma } from '~/lib/prisma'
 import { userSchema } from '~/lib/validations/user'
-import * as userModel from '~/models/userModel'
 
 export const getUsers = async (req: Request, res: Response) => {
-  const users = userModel.getUsers()
+  const users = await prisma.user.findMany()
 
   return res.status(200).json({ users })
 }
@@ -16,7 +16,10 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(403).json({ error: 'Validation error.' })
   }
 
-  const createdUser = userModel.createUser(parsedData.data)
+  // Business logic
+  const createdData = await prisma.user.create({
+    data: parsedData.data,
+  })
 
-  return res.status(201).json({ data: createdUser })
+  return res.status(201).json({ data: createdData })
 }

@@ -2,7 +2,7 @@ import cors from 'cors'
 import express, { type Request, type Response } from 'express'
 
 import { env } from '~/env'
-import userRoutes from '~/routes/userRoutes'
+import userRoute from '~/routes/userRoute'
 
 const app = express()
 const port = env.SERVER_PORT || 4321
@@ -21,7 +21,7 @@ app.get('/', (req: Request, res: Response) => {
     'create-e3-app': 'https://github.com/musabdev/create-e3-app',
   })
 })
-app.use('/users', userRoutes)
+app.use('/users', userRoute)
 
 app.listen(port, () => {
   console.log(`server started, url: http://localhost:${port}`)

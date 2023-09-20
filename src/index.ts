@@ -12,7 +12,7 @@ async function main() {
 
   p.intro(`${color.bgGreen(color.black(' create-e3-app '))}`)
 
-  const { name, packageManager } = await p.group(
+  const { name, database, packageManager } = await p.group(
     {
       name: () =>
         p.text({
@@ -34,8 +34,7 @@ async function main() {
         }),
       database: () => {
         return p.select({
-          message:
-            "What database ORM would you like to use? (this feature doesn't work yet 🥲)",
+          message: 'What database ORM would you like to use?',
           options: [
             { value: 'none', label: 'None' },
             { value: 'prisma', label: 'Prisma' },
@@ -70,6 +69,28 @@ async function main() {
     recursive: true,
   })
   await execShellCommand(`cd ${name} && ${packageManager} install`)
+
+  if (database === 'none') {
+    fs.cpSync(path.join(__dirname, '../template/extra/database/none'), name, {
+      recursive: true,
+    })
+  }
+  if (database === 'prisma') {
+    fs.cpSync(path.join(__dirname, '../template/extra/database/prisma'), name, {
+      recursive: true,
+    })
+    await execShellCommand(
+      `cd ${name} && ${
+        packageManager === 'npm' || packageManager === 'pnpm'
+          ? `${packageManager} install @prisma/client`
+          : 'yarn add @prisma/client'
+      } && ${
+        packageManager === 'npm' || packageManager === 'pnpm'
+          ? `${packageManager} install -D prisma`
+          : 'yarn add -D prisma'
+      }`,
+    )
+  }
 
   spinner.stop(`Installation completed.`)
   let nextSteps = `cd ${name}\n${packageManager} run dev`
