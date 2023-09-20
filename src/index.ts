@@ -1,16 +1,14 @@
 import * as p from '@clack/prompts'
-import fs from 'fs'
-import path from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
 import color from 'picocolors'
 
 import { execShellCommand } from './utils'
 
-const REPO_URL = 'https://github.com/musabdev/create-e3-app'
-
 async function main() {
   console.clear()
 
-  p.intro(`${color.bgGreen(color.black(' create-e3-app '))}`)
+  p.intro(`${color.bgCyan(color.black(' create-e3-app '))}`)
 
   const { name, database, packageManager } = await p.group(
     {
@@ -22,12 +20,8 @@ async function main() {
             if (!value) {
               return 'Please enter a path.'
             }
-            // If directory is not exists, create it
-            if (!fs.existsSync(value)) {
-              fs.mkdirSync(value)
-            }
-            // If the directory is not black
-            if (fs.readdirSync(value).length > 0) {
+            // If the directory is not empty
+            if (fs.existsSync(value) && fs.readdirSync(value).length > 0) {
               return 'Please select a empty directory.'
             }
           },
@@ -65,6 +59,8 @@ async function main() {
   spinner.start(`Installing via ${packageManager}.`)
 
   // Installation
+  if (!fs.existsSync(name)) fs.mkdirSync(name)
+
   fs.cpSync(path.join(__dirname, '../template/base'), name, {
     recursive: true,
   })
@@ -97,7 +93,7 @@ async function main() {
   p.note(nextSteps, 'Next steps.')
   p.outro(
     `Problems? ${color.underline(
-      color.green('https://github.com/musabdev/create-e3-app/issues'),
+      color.cyan('https://github.com/musabdev/create-e3-app/issues'),
     )}`,
   )
 }

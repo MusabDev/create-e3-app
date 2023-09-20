@@ -1,6 +1,6 @@
 {
   "name": "create-e3-app",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Create backend application with the e3 stack",
   "repository": {
     "type": "git",
@@ -21,8 +21,8 @@
     "create-e3-app",
     "express.js",
     "prisma",
-    "e3-stack",
-    "typescript"
+    "typescript",
+    "e3-stack"
   ],
   "author": "musabdev",
   "license": "MIT",
