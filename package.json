@@ -1,13 +1,13 @@
 {
   "name": "create-e3-app",
-  "version": "0.0.1",
-  "description": "Create backend application with the e3 stack",
+  "version": "0.0.6",
+  "description": "The best way to start a typesafe backend with Typescript and Express.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/musabdev/create-e3-app.git",
     "directory": "cli"
   },
-  "main": "index.js",
+  "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "bin": {
     "create-e3-app": "./dist/index.js"
@@ -19,9 +19,9 @@
   },
   "keywords": [
     "create-e3-app",
+    "typescript",
     "express.js",
     "prisma",
-    "typescript",
     "e3-stack"
   ],
   "author": "musabdev",

@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import * as p from '@clack/prompts'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -54,6 +56,7 @@ async function main() {
             { value: 'npm', label: 'npm' },
             { value: 'pnpm', label: 'pnpm' },
             { value: 'yarn', label: 'yarn' },
+            { value: 'bun', label: 'bun' },
           ],
         }),
     },
@@ -87,11 +90,11 @@ async function main() {
     })
     await execShellCommand(
       `cd ${name} && ${
-        packageManager === 'npm' || packageManager === 'pnpm'
+        packageManager !== 'yarn'
           ? `${packageManager} install @prisma/client`
           : 'yarn add @prisma/client'
       } && ${
-        packageManager === 'npm' || packageManager === 'pnpm'
+        packageManager !== 'yarn'
           ? `${packageManager} install -D prisma`
           : 'yarn add -D prisma'
       }`,

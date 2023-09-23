@@ -15,6 +15,7 @@ app.use(
   }),
 )
 app.use(express.json())
+app.use(express.static('public'))
 
 app.get('/', (req: Request, res: Response) => {
   return res.status(200).json({
