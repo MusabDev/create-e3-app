@@ -26,7 +26,7 @@ npm create e3-app@latest
 or
 
 ```bash
-yarn create e3-app@latest
+yarn create e3-app
 ```
 
 or
