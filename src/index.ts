@@ -97,7 +97,7 @@ async function main() {
         packageManager !== 'yarn'
           ? `${packageManager} install -D prisma`
           : 'yarn add -D prisma'
-      }`,
+      } && npx prisma generate`,
     )
   }
 
