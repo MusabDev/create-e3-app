@@ -1,6 +1,6 @@
 {
   "name": "create-e3-app",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "The best way to start a typesafe backend with Typescript and Express.js",
   "repository": {
     "type": "git",

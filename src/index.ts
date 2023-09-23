@@ -85,19 +85,25 @@ async function main() {
     })
   }
   if (database === 'prisma') {
-    fs.cpSync(path.join(__dirname, '../template/extra/database/prisma'), name, {
-      recursive: true,
-    })
-    await execShellCommand(
-      `cd ${name} && ${
-        packageManager !== 'yarn'
-          ? `${packageManager} install @prisma/client`
-          : 'yarn add @prisma/client'
-      } && ${
-        packageManager !== 'yarn'
-          ? `${packageManager} install -D prisma`
-          : 'yarn add -D prisma'
-      } && npx prisma generate`,
+    fs.cp(
+      path.join(__dirname, '../template/extra/database/prisma'),
+      name,
+      {
+        recursive: true,
+      },
+      async () => {
+        await execShellCommand(
+          `cd ${name} && ${
+            packageManager !== 'yarn'
+              ? `${packageManager} install @prisma/client`
+              : 'yarn add @prisma/client'
+          } && ${
+            packageManager !== 'yarn'
+              ? `${packageManager} install -D prisma`
+              : 'yarn add -D prisma'
+          } && npx prisma generate`,
+        )
+      },
     )
   }
 
