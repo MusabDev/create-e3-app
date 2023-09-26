@@ -77,6 +77,7 @@ async function main() {
   fs.cpSync(path.join(__dirname, '../template/base'), name, {
     recursive: true,
   })
+  fs.renameSync(path.join(name, '_gitignore'), path.join(name, '.gitignore'))
   await execShellCommand(`cd ${name} && ${packageManager} install`)
 
   if (database === 'none') {
@@ -108,9 +109,9 @@ async function main() {
   }
 
   spinner.stop(`Installation completed.`)
-  let nextSteps = `cd ${name}
-  ${database === 'prisma' && 'npx prisma generate'}
-  ${packageManager} run dev`
+  let nextSteps = `cd ${name}\n${
+    database === 'prisma' ? 'npx prisma generate\n' : ''
+  }${packageManager} run dev`
   p.note(nextSteps, 'Next steps.')
   p.outro(
     `Problems? ${color.underline(
