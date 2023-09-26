@@ -1,6 +1,6 @@
 {
   "name": "create-e3-app",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "The best way to start a typesafe backend with Typescript and Express.js",
   "repository": {
     "type": "git",
@@ -15,7 +15,8 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "rm -rf ./dist && tsc",
-    "dev": "ts-node ./src/index.ts"
+    "dev": "ts-node ./src/index.ts",
+    "deploy": "rm -rf ./dist && tsc && npm publish"
   },
   "keywords": [
     "create-e3-app",
