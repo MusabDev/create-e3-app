@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { userSchema } from '~/lib/validations/user'
+import { createUserSchema } from '~/lib/validations/user'
 
 export const getUsers = () => {
   return [
@@ -11,7 +11,7 @@ export const getUsers = () => {
   ]
 }
 
-export const createUser = (data: z.infer<typeof userSchema>) => {
+export const createUser = (data: z.infer<typeof createUserSchema>) => {
   // Write data to the database
 
   return data
