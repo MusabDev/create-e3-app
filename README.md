@@ -1,4 +1,4 @@
-# E3 Stack - The best way to start a typesafe backend
+# (No longer maintained) E3 Stack - The best way to start a typesafe backend
 
 A powerful tech stack for building robust and scalable APIs using TypeScript, Express.js, and optionally Prisma, along with minor dependencies like Zod, ESLint, and Prettier.
 
